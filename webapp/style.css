@@ -1,0 +1,52 @@
+#TextOrImage{
+	position: relative;
+	right: -295px;
+	bottom: 140px;	
+	width: 100px;
+}
+#main{
+	position: relative;
+	right: 280px;
+	bottom: -150px;
+}
+
+#fontSize{
+	position: relative;
+	bottom: -10em;
+	right: 15em;
+}
+#button{
+	position: relative;
+	right: -50em;
+	bottom: 15em;
+}
+
+#textV{
+	position: relative;
+	right: -290px;
+	bottom: 110px;	
+}
+
+
+#cross{
+	position: relative;
+	right: -10em;
+	bottom: 10em;
+	width: 30em;
+    height: 40em;
+    visibility:visible;
+    z-index:2;
+   }
+body {
+    background-color: #b0c4de;
+}
+#display li{
+	display: inline-block;
+	padding: 2px;
+}
+
+#keywords{
+	position: relative;
+	right: -23em;
+	bottom: 25em;
+}
