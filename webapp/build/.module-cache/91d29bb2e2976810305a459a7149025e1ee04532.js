@@ -1,8 +1,8 @@
 var SubmitB = React.createClass({displayName: "SubmitB",
 	getInitialState: function(){
-		return{value: '',  text: false, para: '', position: [], keywords: [], data: {} };
+		return{value: '',  text: false, para: '', position: [], keywords: []};
 	},
-    
+	
 	handleClick : function(e){
 		this.setState({value: this.refs['a'].state.text, 
 					   text: this.refs['b'].state.text, 
@@ -15,28 +15,8 @@ var SubmitB = React.createClass({displayName: "SubmitB",
     		console.log(this.state.para);
     		console.log(this.state.position);
     		console.log(this.state.keywords);
-    		var data = 
-    		{
-    		 "position" : this.state.position,
-    		 "isItText" : this.state.text,
-    		 "Text" : this.state.para,
-    		"FontSize" : this.state.value,
-    		"Keywords" : this.state.keywords
-    		};
-    		console.log(data);
-    		this.setState({data: {
-    		 "position" : this.state.position,
-    		 "isItText" : this.state.text,
-    		 "Text" : this.state.para,
-    		"FontSize" : this.state.value,
-    		"Keywords" : this.state.keywords
-    		}}, function(){
-    			console.log(this.state.data);
-    		});
     	});		
-		
 	},
-	
 	render : function(){
 		var value = this.state.value;
 		var text = this.state.text;

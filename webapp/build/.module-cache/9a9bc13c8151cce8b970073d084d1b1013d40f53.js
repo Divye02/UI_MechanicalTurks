@@ -1,4 +1,4 @@
-var SubmitB = React.createClass({
+var SubmitB = React.createClass({displayName: "SubmitB",
 	getInitialState: function(){
 		return{value: '',  text: false, para: '', position: [], keywords: [], data: {} };
 	},
@@ -24,7 +24,8 @@ var SubmitB = React.createClass({
     		"Keywords" : this.state.keywords
     		};
     		console.log(data);
-    		this.setState({data: {
+    	});		
+		this.setState({data: {
     		 "position" : this.state.position,
     		 "isItText" : this.state.text,
     		 "Text" : this.state.para,
@@ -33,8 +34,6 @@ var SubmitB = React.createClass({
     		}}, function(){
     			console.log(this.state.data);
     		});
-    	});		
-		
 	},
 	
 	render : function(){
@@ -44,19 +43,19 @@ var SubmitB = React.createClass({
 		var position = this.state.position;
 		return (
 			
-			<div>
-				<TextImage ref="b" value={text} />
-				<TextV ref="c" value={para} />
-				<FontSize ref = "a" value={value} />
-				<Imagepos ref = "d" value={position} />	
-				<Keywords ref = "e" value={this.state.keywords} />				
-				<button onClick={this.handleClick} id="button">Submit</button>
-			</div>
+			React.createElement("div", null, 
+				React.createElement(TextImage, {ref: "b", value: text}), 
+				React.createElement(TextV, {ref: "c", value: para}), 
+				React.createElement(FontSize, {ref: "a", value: value}), 
+				React.createElement(Imagepos, {ref: "d", value: position}), 	
+				React.createElement(Keywords, {ref: "e", value: this.state.keywords}), 				
+				React.createElement("button", {onClick: this.handleClick, id: "button"}, "Submit")
+			)
 		);
 	}
 });
 
-var Imagepos = React.createClass({
+var Imagepos = React.createClass({displayName: "Imagepos",
 	getInitialState: function(){
 		return {position: this.props.value, clicks: 0};
 	},
@@ -83,16 +82,16 @@ var Imagepos = React.createClass({
 	
 	render:function(){		
 		return(	
-			<form name="pointform" method="post">
-				<div id="pointer_div"  >
-					<img src="test.png" id="cross" onClick= {this.handleChange} />
-				</div>
-			</form> 
+			React.createElement("form", {name: "pointform", method: "post"}, 
+				React.createElement("div", {id: "pointer_div"}, 
+					React.createElement("img", {src: "test.png", id: "cross", onClick: this.handleChange})
+				)
+			) 
 			);
 	}
 });
 
-var TextV = React.createClass({
+var TextV = React.createClass({displayName: "TextV",
 	getInitialState: function(){
 		return {value: this.props.value};
 	},
@@ -102,12 +101,12 @@ var TextV = React.createClass({
 
 	render: function  () {
 		var value = this.state.value;
-		return(<div className="form-group" id = "textV">
-      			<label className="col-sm-1 control-label">Text</label>
-      				<div className="col-sm-4">
-        				<textarea className="form-control" rows= "10" id="focusedInput" onChange={this.handleChange} type="text" value={this.state.value}/>
-      				</div>
-      			</div>
+		return(React.createElement("div", {className: "form-group", id: "textV"}, 
+      			React.createElement("label", {className: "col-sm-1 control-label"}, "Text"), 
+      				React.createElement("div", {className: "col-sm-4"}, 
+        				React.createElement("textarea", {className: "form-control", rows: "10", id: "focusedInput", onChange: this.handleChange, type: "text", value: this.state.value})
+      				)
+      			)
 			);
 	}
 
@@ -115,7 +114,7 @@ var TextV = React.createClass({
 
 
 
-var TextImage = React.createClass({
+var TextImage = React.createClass({displayName: "TextImage",
 	getInitialState: function(){
 		return {text: this.props.value};
 	},
@@ -127,15 +126,15 @@ var TextImage = React.createClass({
 	},
 	render: function(){
 		return(
-			<div className="radio" id="TextOrImage">
-			  <label><input type="radio"  name="optradio" onChange={this.itsText} />Text</label>
-			  <label><input type="radio"  name="optradio" onChange={this.itsImage} />Image</label>	
-			</div>
+			React.createElement("div", {className: "radio", id: "TextOrImage"}, 
+			  React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsText}), "Text"), 
+			  React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsImage}), "Image")	
+			)
 			);
 	}
 });
 
-var FontSize = React.createClass({
+var FontSize = React.createClass({displayName: "FontSize",
 	getInitialState: function(){
 		return {text: this.props.value};
 	},
@@ -143,29 +142,29 @@ var FontSize = React.createClass({
 		this.setState({text: e.target.value});
 	},
 	render: function  () {
-		return(<div className="form-group" id= "fontSize">
-      			<label className="col-sm-1 control-label">FontSize</label>
-      				<div className="col-sm-1">
-        				<textarea className="form-control" rows="1" id="focusedInput" onChange={this.handleChange} type="text" value={this.text}/>
-      				</div>
-      			</div>
+		return(React.createElement("div", {className: "form-group", id: "fontSize"}, 
+      			React.createElement("label", {className: "col-sm-1 control-label"}, "FontSize"), 
+      				React.createElement("div", {className: "col-sm-1"}, 
+        				React.createElement("textarea", {className: "form-control", rows: "1", id: "focusedInput", onChange: this.handleChange, type: "text", value: this.text})
+      				)
+      			)
 			);
 	}
 });
 
-var FinalKeywords = React.createClass({
+var FinalKeywords = React.createClass({displayName: "FinalKeywords",
 	render: function() {
     var createItem = function(itemText, index) {
-      return <li key={index + itemText}>{itemText}</li>;
+      return React.createElement("li", {key: index + itemText}, itemText);
     };
-    return (<div id="display">
-    		<ul>{this.props.items.map(createItem)}</ul></div>);
+    return (React.createElement("div", {id: "display"}, 
+    		React.createElement("ul", null, this.props.items.map(createItem))));
   			
   	}
 });
 
 
-var Keywords = React.createClass({
+var Keywords = React.createClass({displayName: "Keywords",
   getInitialState: function() {
     return {keywords: [], text: ''};
   },
@@ -180,21 +179,21 @@ var Keywords = React.createClass({
   },
   render: function() {
     return (
-      <div id="keywords">
-        <label className="col-sm-1 control-label">Keywords</label>
-        <FinalKeywords items={this.state.keywords} />
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange} value={this.state.text} />
-          <button>Add</button>
-        </form>
-      </div>
+      React.createElement("div", {id: "keywords"}, 
+        React.createElement("label", {className: "col-sm-1 control-label"}, "Keywords"), 
+        React.createElement(FinalKeywords, {items: this.state.keywords}), 
+        React.createElement("form", {onSubmit: this.handleSubmit}, 
+          React.createElement("input", {onChange: this.onChange, value: this.state.text}), 
+          React.createElement("button", null, "Add")
+        )
+      )
     );
   }
 });
 
 
 
-React.render(<SubmitB /> , document.getElementById('main'));
+React.render(React.createElement(SubmitB, null) , document.getElementById('main'));
 
 
 

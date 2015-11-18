@@ -23,20 +23,20 @@ var SubmitB = React.createClass({displayName: "SubmitB",
     		"FontSize" : this.state.value,
     		"Keywords" : this.state.keywords
     		};
-    		console.log(data);
-    		this.setState({data: {
-    		 "position" : this.state.position,
-    		 "isItText" : this.state.text,
-    		 "Text" : this.state.para,
-    		"FontSize" : this.state.value,
-    		"Keywords" : this.state.keywords
-    		}}, function(){
-    			console.log(this.state.data);
-    		});
+    		$.ajax({
+    		      url: this.props.url,
+    		      dataType: 'json',
+    		      type: 'POST',
+    		      data: e,
+    		      success: function(data) {
+    		        console.error(data);
+    		      }.bind(this),
+    		      error: function(xhr, status, err) {
+    		        console.error(this.props.url, status, err.toString());
+    		      }.bind(this)
+    		    });
     	});		
-		
 	},
-	
 	render : function(){
 		var value = this.state.value;
 		var text = this.state.text;
