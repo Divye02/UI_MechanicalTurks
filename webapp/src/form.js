@@ -4,36 +4,17 @@ var SubmitB = React.createClass({
 	},
     
 	handleClick : function(e){
-		this.setState({value: this.refs['a'].state.text, 
-					   text: this.refs['b'].state.text, 
-					   para: this.refs['c'].state.value,
-					   position: this.refs['d'].state.position,
-					   keywords: this.refs['e'].state.keywords
-						}, function () {
-    		console.log(this.state.value);	
-    		console.log(this.state.text);
-    		console.log(this.state.para);
-    		console.log(this.state.position);
-    		console.log(this.state.keywords);
-    		var data = 
-    		{
-    		 "position" : this.state.position,
-    		 "isItText" : this.state.text,
-    		 "Text" : this.state.para,
-    		"FontSize" : this.state.value,
-    		"Keywords" : this.state.keywords
-    		};
-    		console.log(data);
-    		this.setState({data: {
-    		 "position" : this.state.position,
-    		 "isItText" : this.state.text,
-    		 "Text" : this.state.para,
-    		"FontSize" : this.state.value,
-    		"Keywords" : this.state.keywords
-    		}}, function(){
-    			console.log(this.state.data);
-    		});
-    	});		
+		var data = 
+		    		{
+		    		 "position" : this.refs['d'].state.position,
+		    		 "isItText" : this.refs['b'].state.text,
+		    		 "Text" : this.refs['c'].state.value,
+		    		"FontSize" : this.refs['a'].state.text,
+		    		"Keywords" :  this.refs['e'].state.keywords
+		    		};
+		console.log(data);
+
+    	this.setState({value: '',  text: false, para: '', position: [], keywords: [], data: {}});	
 		
 	},
 	
@@ -62,8 +43,8 @@ var Imagepos = React.createClass({
 	},
 
 	handleChange: function(event){
-			var OFFSET_X = 606;
-			var OFFSET_Y = 75 ;
+			var OFFSET_X = 606 + 42+42;
+			var OFFSET_Y = 82+1+51;
 			var pos_x = event.clientX?(event.clientX):event.pageX;
 			var pos_y = event.clientY?(event.clientY):event.pageY;
 			if(this.state.clicks == 0){
@@ -99,7 +80,9 @@ var TextV = React.createClass({
 	handleChange : function(e){
 		this.setState({value: e.target.value});
 	},
-
+	componentWillReceiveProps: function(np){
+		this.setState({value: np.value});
+	},
 	render: function  () {
 		var value = this.state.value;
 		return(<div className="form-group" id = "textV">
@@ -125,6 +108,9 @@ var TextImage = React.createClass({
 	itsImage: function(e){
 		this.setState({text: false});
 	},
+	componentWillReceiveProps: function(np){
+		this.setState({text: np.value});
+	},
 	render: function(){
 		return(
 			<div className="radio" id="TextOrImage">
@@ -142,11 +128,14 @@ var FontSize = React.createClass({
 	handleChange : function(e){
 		this.setState({text: e.target.value});
 	},
+	componentWillReceiveProps: function(np){
+		this.setState({text: np.value});
+	},
 	render: function  () {
 		return(<div className="form-group" id= "fontSize">
       			<label className="col-sm-1 control-label">FontSize</label>
       				<div className="col-sm-1">
-        				<textarea className="form-control" rows="1" id="focusedInput" onChange={this.handleChange} type="text" value={this.text}/>
+        				<textarea className="form-control" rows="1" id="focusedInput" onChange={this.handleChange} type="text" value={this.state.text}/>
       				</div>
       			</div>
 			);
@@ -172,6 +161,9 @@ var Keywords = React.createClass({
   onChange: function(e) {
     this.setState({text: e.target.value});
   },
+  componentWillReceiveProps: function(np){
+		this.setState({keywords: np.value, text: ''});
+	},
   handleSubmit: function(e) {
     e.preventDefault();
     var nextkeywords = this.state.keywords.concat([this.state.text]);
@@ -181,7 +173,7 @@ var Keywords = React.createClass({
   render: function() {
     return (
       <div id="keywords">
-        <label className="col-sm-1 control-label">Keywords</label>
+        <label>Keywords</label>
         <FinalKeywords items={this.state.keywords} />
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.onChange} value={this.state.text} />
@@ -191,6 +183,83 @@ var Keywords = React.createClass({
     );
   }
 });
+
+
+var Imagepos = React.createClass({
+	getInitialState: function(){
+		return {position: this.props.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false};
+	},
+	componentWillReceiveProps: function(np){
+		var c = document.getElementById("cross");
+					var ctx = c.getContext("2d");
+					console.log(this.state.x_axis);
+					console.log(this.state.y_axis); 
+					console.log(this.state.width);
+					console.log(this.state.height);
+					ctx.clearRect(this.state.x_axis-2, this.state.y_axis-2, this.state.width+4, this.state.height+4);
+		this.setState({position: np.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false});
+	},
+	handleChange: function(event){
+			var OFFSET_X = 606 - 42+114+7;
+			var OFFSET_Y = 75 -60+9+32-28;
+			var offset = $("#cross").offset();
+			console.log(offset.left);
+			var pos_x = event.clientX?(event.clientX):event.pageX;
+			pos_x = pos_x - offset.left; 
+			var pos_y = event.clientY?(event.clientY):event.pageY;
+			console.log(offset.top);
+			pos_y = pos_y - offset.top;
+			if(this.state.clicks == 0){
+				this.setState({x_axis: pos_x, y_axis: pos_y, clicks: this.state.clicks + 1 , position: [pos_x, pos_y]}, function(){
+					console.log(this.state.position);
+				});
+			}
+			else if(this.state.clicks == 1){
+				this.setState({
+					width: pos_x - this.state.x_axis, height: pos_y - this.state.y_axis ,
+					clicks: this.state.clicks + 1 , position: [this.state.position[0], this.state.position[1], pos_x, pos_y]}, function(){
+					console.log(this.state.position);
+					var c = document.getElementById("cross");
+					var ctx = c.getContext("2d");
+					console.log(this.state.x_axis);
+					console.log(this.state.y_axis); 
+					console.log(this.state.width);
+					console.log(this.state.height);
+					ctx.strokeRect(this.state.x_axis, this.state.y_axis, this.state.width, this.state.height);
+				});
+			}
+			
+			else{
+				document.getElementById("cross").onclick = function() { return false; } ;
+			}	
+	},
+	handleClick: function(){
+		this.setState({removeBox: true, clicks: 0}, function(){
+			console.log(this.state.removeBox);
+			var c = document.getElementById("cross");
+					var ctx = c.getContext("2d");
+					console.log(this.state.x_axis);
+					console.log(this.state.y_axis); 
+					console.log(this.state.width);
+					console.log(this.state.height);
+					ctx.clearRect(this.state.x_axis-2, this.state.y_axis-2, this.state.width+4, this.state.height+4);
+		});
+	},
+	
+	render:function(){		
+		
+		return(		<div>
+					
+					<img src="test.png" id="cross2" onClick= {this.handleChange} />	
+					<canvas width= "520" height="600" id="cross" onClick= {this.handleChange}/>
+					<button id="addRemoveBox" onClick={this.handleClick}>Remove</button>
+					</div>
+			);
+	}
+});
+
+
+
 
 
 

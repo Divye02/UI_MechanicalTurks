@@ -9,16 +9,17 @@
 	right: 280px;
 	bottom: -150px;
 }
-
+#container { position: relative; height: 200px; width: 200px; right: -280px;}
+.child { position: absolute;}
 #fontSize{
 	position: relative;
 	bottom: -10em;
 	right: 15em;
 }
 #button{
-	position: relative;
-	right: -50em;
-	bottom: 15em;
+	position: absolute;
+	right: 40em;
+	bottom: -25em;
 }
 
 #textV{
@@ -27,16 +28,30 @@
 	bottom: 110px;	
 }
 
-
+#addRemoveBox{
+	position: absolute;
+	right: -250px;
+	bottom: 110px;	
+}
 #cross{
-	position: relative;
+	position: absolute;
 	right: -10em;
-	bottom: 10em;
-	width: 30em;
-    height: 40em;
+	bottom: -30em;
+	width: 520px;
+    height: 600px;
     visibility:visible;
-    z-index:2;
+    z-index:0;
    }
+   #cross2{
+	position: absolute;
+	right: -10em;
+	bottom: -30em;
+	width: 520px;
+    height: 600px;
+    visibility:visible;
+    z-index:0;
+   }
+
 body {
     background-color: #b0c4de;
 }
@@ -46,7 +61,14 @@ body {
 }
 
 #keywords{
-	position: relative;
-	right: -23em;
-	bottom: 25em;
+	position: absolute;
+	right: 50em;
+	bottom: -20em;
+}
+
+#myCanvas{
+	z-index : 3;
+}
+.top{
+	z-index: 900;
 }
