@@ -190,13 +190,7 @@ var Imagepos = React.createClass({
 		return {position: this.props.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false};
 	},
 	componentWillReceiveProps: function(np){
-		var c = document.getElementById("cross");
-					var ctx = c.getContext("2d");
-					console.log(this.state.x_axis);
-					console.log(this.state.y_axis); 
-					console.log(this.state.width);
-					console.log(this.state.height);
-					ctx.clearRect(this.state.x_axis-2, this.state.y_axis-2, this.state.width+4, this.state.height+4);
+		
 		this.setState({position: np.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false});
 	},
 	handleChange: function(event){
