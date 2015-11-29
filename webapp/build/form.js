@@ -189,6 +189,10 @@ var Imagepos = React.createClass({displayName: "Imagepos",
 		return {position: this.props.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false};
 	},
 	componentWillReceiveProps: function(np){
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 66c97f917337e3a7f6f04393785f6bbfccdc8699
 		this.setState({position: np.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false});
 	},
 	handleChange: function(event){

@@ -1,0 +1,88 @@
+#TextOrImage{
+	position: relative;
+	right: -295px;
+	bottom: 140px;	
+	width: 100px;
+}
+#main{
+	position: relative;
+	right: 280px;
+	bottom: -150px;
+}
+#container { position: relative; height: 200px; width: 200px; right: -280px;}
+.child { position: absolute;}
+#fontSize{
+	position: relative;
+	bottom: -10em;
+	right: 15em;
+}
+#button{
+	position: absolute;
+	right: 40em;
+	bottom: -25em;
+}
+
+#textV{
+	position: relative;
+	right: -290px;
+	bottom: 110px;	
+}
+
+#addRemoveBox{
+	position: absolute;
+	right: -250px;
+	bottom: 110px;	
+}
+#cross{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+   }
+   #cross1{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+   }
+   #cross2{
+	position: absolute;
+	height: auto;
+	right: -10em;
+	bottom: -50em;
+	width: auto;
+    
+    visibility:visible;
+    z-index:0;
+   }
+
+body {
+    background-color: #b0c4de;
+}
+#display li{
+	display: inline-block;
+	padding: 2px;
+}
+
+#keywords{
+	position: absolute;
+	right: 60em;
+	bottom: -20em;
+}
+#pdf_selector{
+	position: absolute;
+	right: -20em;
+	top: 60em;
+}
+
+#next_prev{
+	position: absolute;
+	top: 60em;
+	right: 20em;
+}
+#myCanvas{
+	z-index : 3;
+}
+.top{
+	z-index: 900;
+}
