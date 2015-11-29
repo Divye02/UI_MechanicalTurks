@@ -1,6 +1,4 @@
 var express = require('express');
-var PDF = require('react-pdf');
-var React = require('react');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
