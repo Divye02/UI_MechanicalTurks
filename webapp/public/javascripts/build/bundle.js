@@ -4,7 +4,7 @@
  */
 var React = require('react'),
     PDF = require('../');
-
+var API_URL = "http://localhost:3000";
 var SubmitB = React.createClass({displayName: "SubmitB",
   getInitialState: function(){
     return{value: '',  text: false, para: '', position: [], keywords: [], data: {} };
@@ -19,7 +19,16 @@ var SubmitB = React.createClass({displayName: "SubmitB",
             "FontSize" : this.refs['a'].state.text,
             "Keywords" :  this.refs['e'].state.keywords
             };
-    console.log(data);
+    //console.log(data);
+    $.ajax({
+                 url: API_URL + '/data',
+                 dataType: 'json',
+                 type: 'POST',
+                 cache: false,
+                 data: data
+             }).done(function (data) {
+                 console.log(data);
+             });
 
       this.setState({value: '',  text: false, para: '', position: [], keywords: [], data: {}}); 
     
@@ -44,41 +53,7 @@ var SubmitB = React.createClass({displayName: "SubmitB",
   }
 });
 
-var Imagepos = React.createClass({displayName: "Imagepos",
-  getInitialState: function(){
-    return {position: this.props.value, clicks: 0};
-  },
 
-  handleChange: function(event){
-      var OFFSET_X = 606 + 42+42;
-      var OFFSET_Y = 82+1+51;
-      var pos_x = event.clientX?(event.clientX):event.pageX;
-      var pos_y = event.clientY?(event.clientY):event.pageY;
-      if(this.state.clicks == 0){
-        this.setState({clicks: this.state.clicks + 1 , position: [pos_x-OFFSET_X, pos_y-OFFSET_Y]}, function(){
-          console.log(this.state.position);
-        });
-      }
-      else if(this.state.clicks == 1){
-        this.setState({clicks: this.state.clicks + 1 , position: [this.state.position[0], this.state.position[1], pos_x-OFFSET_X, pos_y-OFFSET_Y]}, function(){
-          console.log(this.state.position);
-        });
-      }
-      else{
-        document.getElementById("cross").onclick = function() { return false; } ;
-      } 
-  },
-  
-  render:function(){    
-    return( 
-      React.createElement("form", {name: "pointform", method: "post"}, 
-        React.createElement("div", {id: "pointer_div"}, 
-          React.createElement("img", {src: "test.png", id: "cross", onClick: this.handleChange})
-        )
-      ) 
-      );
-  }
-});
 
 var TextV = React.createClass({displayName: "TextV",
   getInitialState: function(){
