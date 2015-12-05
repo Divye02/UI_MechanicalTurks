@@ -4,7 +4,7 @@
  */
 var React = require('react'),
     PDF = require('../');
-var API_URL = "http://localhost:3000";
+var API_URL = "http://52.25.69.175:3000";
 var SubmitB = React.createClass({displayName: "SubmitB",
   getInitialState: function(){
     return{value: '',  text: false, para: '', position: [], keywords: [], data: {} };
@@ -171,7 +171,7 @@ var Imagepos = React.createClass({displayName: "Imagepos",
   getInitialState: function(){
     return {position: this.props.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false, currentPage: 2,
       pages: 0,
-      file: 'test.pdf'};
+      file: ''};
   },
   componentWillReceiveProps: function(np){
     

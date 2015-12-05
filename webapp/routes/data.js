@@ -7,9 +7,9 @@ var Bbinfo = require('../models/bbInfo');
 router.post('/', function(req, res, next) {
       console.log(req.body);
       var data = req.body;
-      res.send(data);
-       Bbinfo.create({istext: data["isItText"], text: data["Text"], pageno: data["FontSize"], keywords: data["keywords"], bbcoordinates: data["position"]}).then(function(data){
-	res.send(data);
+      res.send(data.Keywords);
+       Bbinfo.sync().then(function(){ return Bbinfo.create({istext: data["isItText"], text: data["Text"], pageno: data["FontSize"], keywords: data["Keywords[]"], bbcoordinates: data["position[]"]}); }).then(function(data){
+
 });
 });
 
