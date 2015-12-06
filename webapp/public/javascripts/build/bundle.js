@@ -16,7 +16,7 @@ var SubmitB = React.createClass({displayName: "SubmitB",
              "position" : this.refs['d'].state.position,
              "isItText" : this.refs['b'].state.text,
              "Text" : this.refs['c'].state.value,
-            "FontSize" : this.refs['a'].state.text,
+            "FontSize" : this.refs['d'].state.currentPage,
             "Keywords" :  this.refs['e'].state.keywords
             };
     //console.log(data);
@@ -169,7 +169,7 @@ var Keywords = React.createClass({displayName: "Keywords",
 
 var Imagepos = React.createClass({displayName: "Imagepos",
   getInitialState: function(){
-    return {position: this.props.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false, currentPage: 2,
+    return {position: this.props.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false, currentPage: 1,
       pages: 0,
       file: ''};
   },
@@ -178,13 +178,11 @@ var Imagepos = React.createClass({displayName: "Imagepos",
     this.setState({position: np.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false});
   },
   handleChange: function(event){
-      var OFFSET_X = 606 - 42+114+7;
-      var OFFSET_Y = 75 -60+9+32-28;
       var offset = $("#cross").offset();
       //console.log(offset.left);
-      var pos_x = event.clientX?(event.clientX):event.pageX;
+      var pos_x = event.pageX;
       pos_x = pos_x - offset.left; 
-      var pos_y = event.clientY?(event.clientY):event.pageY;
+      var pos_y = event.pageY;
       //console.log(offset.top);
       pos_y = pos_y - offset.top;
       if(this.state.clicks == 0){
