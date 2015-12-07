@@ -12,6 +12,7 @@
     "express": "~4.11.1",
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
+	"react-tools": "^0",
 	"sequelize": "^3.12.1",
 	"jade": "~1.9.1",
       "ejs": "^1.0.0",
