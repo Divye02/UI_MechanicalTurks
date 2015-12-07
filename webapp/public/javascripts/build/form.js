@@ -1,3 +1,4 @@
+
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * @jsx React.DOM
@@ -40,135 +41,21 @@ var SubmitB = React.createClass({displayName: "SubmitB",
     var para = this.state.para;
     var position = this.state.position;
     return (
-      
-      React.createElement("div", null, 
-        React.createElement(TextImage, {ref: "b", value: text}), 
-        React.createElement(TextV, {ref: "c", value: para}), 
-        React.createElement(FontSize, {ref: "a", value: value}), 
-        React.createElement(Imagepos, {ref: "d", value: position}),   
-        React.createElement(Keywords, {ref: "e", value: this.state.keywords}),        
-        React.createElement("button", {onClick: this.handleClick, id: "button"}, "Submit")
-      )
-    );
-  }
+			
+			React.createElement("div", null, 
+				React.createElement(TextImage, {ref: "b", value: text}), 
+				React.createElement(TextV, {ref: "c", value: para}), 
+				React.createElement(FontSize, {ref: "a", value: value}), 
+				React.createElement(Imagepos, {ref: "d", value: position}), 	
+				React.createElement(Keywords, {ref: "e", value: this.state.keywords}), 				
+				React.createElement("button", {onClick: this.handleClick, id: "button"}, "Submit")
+			)
+		);
+	}
 });
-
-
-
-var TextV = React.createClass({displayName: "TextV",
-  getInitialState: function(){
-    return {value: this.props.value};
-  },
-  handleChange : function(e){
-    this.setState({value: e.target.value});
-  },
-  componentWillReceiveProps: function(np){
-    this.setState({value: np.value});
-  },
-  render: function  () {
-    var value = this.state.value;
-    return(React.createElement("div", {className: "form-group", id: "textV"}, 
-            React.createElement("label", {className: "col-sm-1 control-label"}, "Text"), 
-              React.createElement("div", {className: "col-sm-4"}, 
-                React.createElement("textarea", {className: "form-control", rows: "10", id: "focusedInput", onChange: this.handleChange, type: "text", value: this.state.value})
-              )
-            )
-      );
-  }
-
-});
-
-
-
-var TextImage = React.createClass({displayName: "TextImage",
-  getInitialState: function(){
-    return {text: this.props.value};
-  },
-  itsText: function(e){
-    this.setState({text: true});
-  },
-  itsImage: function(e){
-    this.setState({text: false});
-  },
-  componentWillReceiveProps: function(np){
-    this.setState({text: np.value});
-  },
-  render: function(){
-    return(
-      React.createElement("div", {className: "radio", id: "TextOrImage"}, 
-        React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsText}), "Text"), 
-        React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsImage}), "Image") 
-      )
-      );
-  }
-});
-
-var FontSize = React.createClass({displayName: "FontSize",
-  getInitialState: function(){
-    return {text: this.props.value};
-  },
-  handleChange : function(e){
-    this.setState({text: e.target.value});
-  },
-  componentWillReceiveProps: function(np){
-    this.setState({text: np.value});
-  },
-  render: function  () {
-    return(React.createElement("div", {className: "form-group", id: "fontSize"}, 
-            React.createElement("label", {className: "col-sm-1 control-label"}, "FontSize"), 
-              React.createElement("div", {className: "col-sm-1"}, 
-                React.createElement("textarea", {className: "form-control", rows: "1", id: "focusedInput", onChange: this.handleChange, type: "text", value: this.state.text})
-              )
-            )
-      );
-  }
-});
-
-var FinalKeywords = React.createClass({displayName: "FinalKeywords",
-  render: function() {
-    var createItem = function(itemText, index) {
-      return React.createElement("li", {key: index + itemText}, itemText);
-    };
-    return (React.createElement("div", {id: "display"}, 
-        React.createElement("ul", null, this.props.items.map(createItem))));
-        
-    }
-});
-
-
-var Keywords = React.createClass({displayName: "Keywords",
-  getInitialState: function() {
-    return {keywords: [], text: ''};
-  },
-  onChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  componentWillReceiveProps: function(np){
-    this.setState({keywords: np.value, text: ''});
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var nextkeywords = this.state.keywords.concat([this.state.text]);
-    var nextText = '';
-    this.setState({keywords: nextkeywords, text: nextText});
-  },
-  render: function() {
-    return (
-      React.createElement("div", {id: "keywords"}, 
-        React.createElement("label", null, "Keywords"), 
-        React.createElement(FinalKeywords, {items: this.state.keywords}), 
-        React.createElement("form", {onSubmit: this.handleSubmit}, 
-          React.createElement("input", {onChange: this.onChange, value: this.state.text}), 
-          React.createElement("button", null, "Add")
-        )
-      )
-    );
-  }
-});
-
 
 var Imagepos = React.createClass({displayName: "Imagepos",
-  getInitialState: function(){
+	getInitialState: function(){
     return {position: this.props.value, clicks: 0, x_axis: 0, y_axis: 0, height: 0, width: 0, removeBox: false, currentPage: 1,
       pages: 0,
       file: ''};
@@ -247,33 +134,137 @@ var Imagepos = React.createClass({displayName: "Imagepos",
 
   render:function(){    
     
-    return(   React.createElement("div", null, 
-          
-
-          React.createElement("div", {id: "pdf_selector"}, 
-          React.createElement("label", null, 
-            "Change file", React.createElement("br", null), 
-            React.createElement("input", {type: "file", onChange: this.onFileChange})
-          )
+    return(	
+        React.createElement("div", null, 
+        React.createElement("div", {id: "pdf_selector"}, 
+          React.createElement("label", null, "Change file", React.createElement("br", null), React.createElement("input", {type: "file", onChange: this.onFileChange}), " ")
         ), 
-        React.createElement("div", {id: "cross2"},
-        React.createElement(PDF, {page: this.state.currentPage, file: this.state.file, onDocumentComplete: this._onDocumentComplete}),
-        React.createElement("div", {id: "cross"},
-          React.createElement("canvas", { id:'cross1',width: "100%", height: "100%",onClick: this.handleChange})
-        ) ),
+        React.createElement("div", {id: "cross2"}, 
+          React.createElement(PDF, {page: this.state.currentPage, file: this.state.file, onDocumentComplete: this._onDocumentComplete}), 
+          React.createElement("div", {id: "cross"}, React.createElement("canvas", {id: "cross1", width: "100%", height: "100%", onClick: this.handleChange}))
+        ), 
         React.createElement("div", {id: "next_prev"}, 
           React.createElement("button", {onClick: this.prevPage}, "Previous page"), 
           React.createElement("button", {onClick: this.nextPage}, "Next page")
-          ),
-
-          //React.createElement("img", {src: "../images/test.png", id: "cross2", onClick: this.handleChange}),  
-          //React.createElement("canvas", {width: "auto", height: "auto", id: "cross", onClick: this.handleChange}), 
-          React.createElement("button", {id: "addRemoveBox", onClick: this.handleClick}, "Remove")
-          )
-      );
-  },
-  _onDocumentComplete: function(pages){
+         ), 
+         React.createElement("button", {id: "addRemoveBox", onClick: this.handleClick}, "Remove")
+         )
+          
+			);
+	},
+   _onDocumentComplete: function(pages){
     this.setState({pages: pages});
+  }
+});
+
+var TextV = React.createClass({displayName: "TextV",
+	getInitialState: function(){
+		return {value: this.props.value};
+	},
+	handleChange : function(e){
+		this.setState({value: e.target.value});
+	},
+	componentWillReceiveProps: function(np){
+		this.setState({value: np.value});
+	},
+	render: function  () {
+		var value = this.state.value;
+		return(React.createElement("div", {className: "form-group", id: "textV"}, 
+      			React.createElement("label", {className: "col-sm-1 control-label"}, "Text"), 
+      				React.createElement("div", {className: "col-sm-4"}, 
+        				React.createElement("textarea", {className: "form-control", rows: "10", id: "focusedInput", onChange: this.handleChange, type: "text", value: this.state.value})
+      				)
+      			)
+			);
+	}
+
+});
+
+
+
+var TextImage = React.createClass({displayName: "TextImage",
+	getInitialState: function(){
+		return {text: this.props.value};
+	},
+	itsText: function(e){
+		this.setState({text: true});
+	},
+	itsImage: function(e){
+		this.setState({text: false});
+	},
+	componentWillReceiveProps: function(np){
+		this.setState({text: np.value});
+	},
+	render: function(){
+		return(
+			React.createElement("div", {className: "radio", id: "TextOrImage"}, 
+			  React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsText}), "Text"), 
+			  React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsImage}), "Image")	
+			)
+			);
+	}
+});
+
+var FontSize = React.createClass({displayName: "FontSize",
+	getInitialState: function(){
+		return {text: this.props.value};
+	},
+	handleChange : function(e){
+		this.setState({text: e.target.value});
+	},
+	componentWillReceiveProps: function(np){
+		this.setState({text: np.value});
+	},
+	render: function  () {
+		return(React.createElement("div", {className: "form-group", id: "fontSize"}, 
+      			React.createElement("label", {className: "col-sm-1 control-label"}, "FontSize"), 
+      				React.createElement("div", {className: "col-sm-1"}, 
+        				React.createElement("textarea", {className: "form-control", rows: "1", id: "focusedInput", onChange: this.handleChange, type: "text", value: this.state.text})
+      				)
+      			)
+			);
+	}
+});
+
+var FinalKeywords = React.createClass({displayName: "FinalKeywords",
+	render: function() {
+    var createItem = function(itemText, index) {
+      return React.createElement("li", {key: index + itemText}, itemText);
+    };
+    return (React.createElement("div", {id: "display"}, 
+    		React.createElement("ul", null, this.props.items.map(createItem))));
+  			
+  	}
+});
+
+
+var Keywords = React.createClass({displayName: "Keywords",
+  getInitialState: function() {
+    return {keywords: [], text: ''};
+  },
+  onChange: function(e) {
+    this.setState({text: e.target.value});
+  },
+  componentWillReceiveProps: function(np){
+		this.setState({keywords: np.value, text: ''});
+	},
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var nextkeywords = this.state.keywords.concat([this.state.text]);
+    var nextText = '';
+    this.setState({keywords: nextkeywords, text: nextText});
+  },
+  render: function() {
+    return (
+      React.createElement("div", {id: "keywords"}, 
+        React.createElement("label", null, "Keywords"), 
+        React.createElement(FinalKeywords, {items: this.state.keywords}), 
+        React.createElement("form", {onSubmit: this.handleSubmit}, 
+          React.createElement("input", {onChange: this.onChange, value: this.state.text}), 
+          React.createElement("button", null, "Add")
+        )
+      )
+    );
   }
 });
 
@@ -281,11 +272,7 @@ var Imagepos = React.createClass({displayName: "Imagepos",
 
 
 
-
 React.render(React.createElement(SubmitB, null) , document.getElementById('main'));
-
-
-
 
 
 
@@ -375,7 +362,7 @@ var Pdf = React.createClass({
       });
       return (React.createElement("canvas", {ref: "pdfCanvas"}));
     }
-    return (this.props.loading || React.createElement("div", null, "Loading pdf...."));
+    return (this.props.loading || React.createElement("div", null, ""));
   },
   _onDocumentComplete: function(pdf){
     if (!this.isMounted()) return;
@@ -20209,3 +20196,4 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":31}]},{},[1]);
+
