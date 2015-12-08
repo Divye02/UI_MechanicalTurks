@@ -261,7 +261,7 @@ var Keywords = React.createClass({
   render: function() {
       var Button = ReactBootstrap.Button;
       var Input = ReactBootstrap.Input;
-      const innerButton = <Button>Add</Button>;
+      const innerButton = <Button onClick={this.handleSubmit}>Add</Button>;
     return (
       <div id="keywords">
         <label>Keywords</label>
