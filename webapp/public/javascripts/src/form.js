@@ -40,15 +40,22 @@ var SubmitB = React.createClass({displayName: "SubmitB",
     var text = this.state.text;
     var para = this.state.para;
     var position = this.state.position;
+      var Button = ReactBootstrap.Button;
+      var Row = ReactBootstrap.Row;
+      var Col = ReactBootstrap.Col;
     return (
-			
 			<div>
-				<TextImage ref="b" value={text} />
-				<TextV ref="c" value={para} />
-				<FontSize ref = "a" value={value} />
-				<Imagepos ref = "d" value={position} />	
-				<Keywords ref = "e" value={this.state.keywords} />				
-				<button onClick={this.handleClick} id="button">Submit</button>
+                <Row className="show-grid">
+                    <Col md={6} mdPush={6}>
+				        <TextImage ref="b" value={text} />
+                        <TextV ref="c" value={para} />
+				        <Keywords ref = "e" value={this.state.keywords} />
+                        <Button bsStyle="primary" onClick={this.handleClick} id="button">Submit</Button>
+                    </Col>
+                    <Col md={6} mdPull={6}>
+                        <Imagepos ref = "d" value={position} />
+                    </Col>
+                </Row>
 			</div>
 		);
 	}
@@ -132,22 +139,23 @@ var Imagepos = React.createClass({
     });
   },
 
-  render:function(){    
-    
-    return(	
+  render:function(){
+      var Button = ReactBootstrap.Button;
+      var Input = ReactBootstrap.Input;
+    return(
         <div>
         <div id="pdf_selector">
-          <label>Change file<br/><input type="file" onChange={this.onFileChange}/> </label>
+          <Input label="Change file" type="file" onChange={this.onFileChange}/>
         </div>
         <div id="cross2">
           <PDF page={this.state.currentPage} file={this.state.file} onDocumentComplete={this._onDocumentComplete}/>
           <div id="cross"><canvas id="cross1" width="100%" height="100%" onClick={this.handleChange}/></div>
         </div>
         <div id="next_prev">
-          <button  onClick={this.prevPage}>Previous page</button>
-          <button onClick={this.nextPage}>Next page</button>
+          <Button  onClick={this.prevPage}>Previous page</Button>
+          <Button onClick={this.nextPage}>Next page</Button>
+            <Button bsStyle="danger" id="addRemoveBox" onClick={this.handleClick}>Remove</Button>
          </div>
-         <button id="addRemoveBox" onClick={this.handleClick}>Remove</button>
          </div>
           
 			);
@@ -168,13 +176,11 @@ var TextV = React.createClass({
 		this.setState({value: np.value});
 	},
 	render: function  () {
-		var value = this.state.value;
-		return(<div className="form-group" id = "textV">
-      			<label className="col-sm-1 control-label">Text</label>
-      				<div className="col-sm-4">
-        				<textarea className="form-control" rows= "10" id="focusedInput" onChange={this.handleChange} type="text" value={this.state.value}/>
-      				</div>
-      			</div>
+        var Input = ReactBootstrap.Input;
+		return(
+            <div id = "textV">
+                <Input type="textarea" id="focusedInput" onChange={this.handleChange} label="Text Area" placeholder="Type here." value={this.state.value}/>
+            </div>
 			);
 	}
 
@@ -196,10 +202,14 @@ var TextImage = React.createClass({
 		this.setState({text: np.value});
 	},
 	render: function(){
+        var Input = ReactBootstrap.Input;
+        var Well = ReactBootstrap.Well;
 		return(
 			<div className="radio" id="TextOrImage">
-			  <label><input type="radio"  name="optradio" onChange={this.itsText} />Text</label>
-			  <label><input type="radio"  name="optradio" onChange={this.itsImage} />Image</label>	
+            <Well bsSize="small">
+			  <Input type="radio" label="Text" name="optradio" onChange={this.itsText} />
+			  <Input type="radio" label="Image" name="optradio" onChange={this.itsImage} />
+            </Well>
 			</div>
 			);
 	}
@@ -255,13 +265,15 @@ var Keywords = React.createClass({
     this.setState({keywords: nextkeywords, text: nextText});
   },
   render: function() {
+      var Button = ReactBootstrap.Button;
+      var Input = ReactBootstrap.Input;
+      const innerButton = <Button>Add</Button>;
     return (
       <div id="keywords">
         <label>Keywords</label>
         <FinalKeywords items={this.state.keywords} />
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange} value={this.state.text} />
-          <button>Add</button>
+          <Input type="text" buttonBefore={innerButton} placeholder="Type here." onChange={this.onChange} value={this.state.text} />
         </form>
       </div>
     );
