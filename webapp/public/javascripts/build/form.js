@@ -40,15 +40,22 @@ var SubmitB = React.createClass({displayName: "SubmitB",
     var text = this.state.text;
     var para = this.state.para;
     var position = this.state.position;
+      var Button = ReactBootstrap.Button;
+      var Row = ReactBootstrap.Row;
+      var Col = ReactBootstrap.Col;
     return (
-			
 			React.createElement("div", null, 
-				React.createElement(TextImage, {ref: "b", value: text}), 
-				React.createElement(TextV, {ref: "c", value: para}), 
-				React.createElement(FontSize, {ref: "a", value: value}), 
-				React.createElement(Imagepos, {ref: "d", value: position}), 	
-				React.createElement(Keywords, {ref: "e", value: this.state.keywords}), 				
-				React.createElement("button", {onClick: this.handleClick, id: "button"}, "Submit")
+                React.createElement(Row, {className: "show-grid"}, 
+                    React.createElement(Col, {md: 6, mdPush: 6}, 
+				        React.createElement(TextImage, {ref: "b", value: text}), 
+                        React.createElement(TextV, {ref: "c", value: para}), 
+				        React.createElement(Keywords, {ref: "e", value: this.state.keywords}), 
+                        React.createElement(Button, {bsStyle: "primary", onClick: this.handleClick, id: "button"}, "Submit")
+                    ), 
+                    React.createElement(Col, {md: 6, mdPull: 6}, 
+                        React.createElement(Imagepos, {ref: "d", value: position})
+                    )
+                )
 			)
 		);
 	}
@@ -132,22 +139,23 @@ var Imagepos = React.createClass({displayName: "Imagepos",
     });
   },
 
-  render:function(){    
-    
-    return(	
+  render:function(){
+      var Button = ReactBootstrap.Button;
+      var Input = ReactBootstrap.Input;
+    return(
         React.createElement("div", null, 
         React.createElement("div", {id: "pdf_selector"}, 
-          React.createElement("label", null, "Change file", React.createElement("br", null), React.createElement("input", {type: "file", onChange: this.onFileChange}), " ")
+          React.createElement(Input, {label: "Change file", type: "file", onChange: this.onFileChange})
         ), 
         React.createElement("div", {id: "cross2"}, 
           React.createElement(PDF, {page: this.state.currentPage, file: this.state.file, onDocumentComplete: this._onDocumentComplete}), 
           React.createElement("div", {id: "cross"}, React.createElement("canvas", {id: "cross1", width: "100%", height: "100%", onClick: this.handleChange}))
         ), 
         React.createElement("div", {id: "next_prev"}, 
-          React.createElement("button", {onClick: this.prevPage}, "Previous page"), 
-          React.createElement("button", {onClick: this.nextPage}, "Next page")
-         ), 
-         React.createElement("button", {id: "addRemoveBox", onClick: this.handleClick}, "Remove")
+          React.createElement(Button, {onClick: this.prevPage}, "Previous page"), 
+          React.createElement(Button, {onClick: this.nextPage}, "Next page"), 
+            React.createElement(Button, {bsStyle: "danger", id: "addRemoveBox", onClick: this.handleClick}, "Remove")
+         )
          )
           
 			);
@@ -168,13 +176,11 @@ var TextV = React.createClass({displayName: "TextV",
 		this.setState({value: np.value});
 	},
 	render: function  () {
-		var value = this.state.value;
-		return(React.createElement("div", {className: "form-group", id: "textV"}, 
-      			React.createElement("label", {className: "col-sm-1 control-label"}, "Text"), 
-      				React.createElement("div", {className: "col-sm-4"}, 
-        				React.createElement("textarea", {className: "form-control", rows: "10", id: "focusedInput", onChange: this.handleChange, type: "text", value: this.state.value})
-      				)
-      			)
+        var Input = ReactBootstrap.Input;
+		return(
+            React.createElement("div", {id: "textV"}, 
+                React.createElement(Input, {type: "textarea", id: "focusedInput", onChange: this.handleChange, label: "Text Area", placeholder: "Type here.", value: this.state.value})
+            )
 			);
 	}
 
@@ -196,10 +202,14 @@ var TextImage = React.createClass({displayName: "TextImage",
 		this.setState({text: np.value});
 	},
 	render: function(){
+        var Input = ReactBootstrap.Input;
+        var Well = ReactBootstrap.Well;
 		return(
 			React.createElement("div", {className: "radio", id: "TextOrImage"}, 
-			  React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsText}), "Text"), 
-			  React.createElement("label", null, React.createElement("input", {type: "radio", name: "optradio", onChange: this.itsImage}), "Image")	
+            React.createElement(Well, {bsSize: "small"}, 
+			  React.createElement(Input, {type: "radio", label: "Text", name: "optradio", onChange: this.itsText}), 
+			  React.createElement(Input, {type: "radio", label: "Image", name: "optradio", onChange: this.itsImage})
+            )
 			)
 			);
 	}
@@ -255,13 +265,15 @@ var Keywords = React.createClass({displayName: "Keywords",
     this.setState({keywords: nextkeywords, text: nextText});
   },
   render: function() {
+      var Button = ReactBootstrap.Button;
+      var Input = ReactBootstrap.Input;
+      const innerButton = React.createElement(Button, null, "Add");
     return (
       React.createElement("div", {id: "keywords"}, 
         React.createElement("label", null, "Keywords"), 
         React.createElement(FinalKeywords, {items: this.state.keywords}), 
         React.createElement("form", {onSubmit: this.handleSubmit}, 
-          React.createElement("input", {onChange: this.onChange, value: this.state.text}), 
-          React.createElement("button", null, "Add")
+          React.createElement(Input, {type: "text", buttonBefore: innerButton, placeholder: "Type here.", onChange: this.onChange, value: this.state.text})
         )
       )
     );
