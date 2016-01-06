@@ -40,7 +40,7 @@ var SubmitB = React.createClass({displayName: "SubmitB",
     return (
 			React.createElement("div", null, 
                 React.createElement(Row, {className: "show-grid"}, 
-                    React.createElement(Col, {md: 6, mdPush: 6}, 
+                    React.createElement(Col, {id: "right", md: 6, mdPush: 6}, 
 				        React.createElement(TextImage, {ref: "b", value: text}), 
                         React.createElement(TextV, {ref: "c", value: para}), 
 				        React.createElement(Keywords, {ref: "e", value: this.state.keywords}), 

@@ -40,7 +40,7 @@ var SubmitB = React.createClass({displayName: "SubmitB",
     return (
 			<div>
                 <Row className="show-grid">
-                    <Col md={6} mdPush={6}>
+                    <Col id="right" md={6} mdPush={6}>
 				        <TextImage ref="b" value={text} />
                         <TextV ref="c" value={para} />
 				        <Keywords ref = "e" value={this.state.keywords} />
